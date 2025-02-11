@@ -6,24 +6,33 @@ import br.com.alura.screenmatch.repository.SerieRepository;
 import br.com.alura.screenmatch.service.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/series")
 public class SerieController {
 
     @Autowired
     private SerieService servico;
 
-    @GetMapping("/series")
+    @GetMapping
     public List<SerieDTO> obterSeries(){
         return servico.obterTodasAsSeries();
     }
 
-    @GetMapping("/inicio")
-    public String retornaInicio(){
-        return "Inicio";
+    @GetMapping("/top5")
+    public List<SerieDTO> obterTop5Series(){
+        return servico.obterTop5Series();
     }
+
+    @GetMapping("/lancamento")
+    public List<SerieDTO> obterLancamento(){
+        return servico.obterLancamento();
+    }
+
+
 }
